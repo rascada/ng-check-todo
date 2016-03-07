@@ -1,21 +1,26 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
+import { Todos } from './todos.service';
+import Todo from './todo.component';
+import todoCreator from './todoCreator.component';
 
 @Component({
   selector: 'todo-app',
-  providers: [],
+  providers: [Todos],
   templateUrl: 'app/todo.html',
-  directives: [ROUTER_DIRECTIVES],
-  pipes: []
+  styleUrls: ['app/todo.css'],
+  directives: [ROUTER_DIRECTIVES, todoCreator, Todo],
+  pipes: [],
 })
 @RouteConfig([
 
 ])
 export class TodoApp {
-  defaultMeaning: number = 42;
-  
-  meaningOfLife(meaning?: number) {
-    return `The meaning of life is ${meaning || this.defaultMeaning}`;
+  todos: any[]
+  constructor(private _todos: Todos) { }
+
+  ngOnInit() {
+    this.todos = this._todos.getTodos();
   }
 }

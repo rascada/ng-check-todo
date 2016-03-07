@@ -1,5 +1,9 @@
-<p>
-  todo Works!
-</p>
+<p>todos amount: {{ todos.length }}</p>
+
+<ul>
+  <todo *ngFor='#todo of todos' [todo]='todo'></todo>
+</ul>
+
+<todo-creator></todo-creator>
 
 <router-outlet></router-outlet>
